@@ -104,8 +104,8 @@ def mutation(String1,rate):
 	number=rate*len(string1)*8
 	count=0
 	while(count<number):
-		j=random.random(0,len(String1))
-		k=random.random(0,8)
+		j=random.randrange(0,len(String1))
+		k=random.randrange(0,8)
 		if(String1[j][k]==1):
 			String1[j][k]=0
 		elif (String1[j][k]==0):
@@ -133,6 +133,7 @@ print( "String1=",String1)
 print( "String2=",String2)
 combinedlist=combine(String1,String2)
 print("combined list=",combinedlist)
+string=mutation(combinedlist,30)
 
 
 '''
