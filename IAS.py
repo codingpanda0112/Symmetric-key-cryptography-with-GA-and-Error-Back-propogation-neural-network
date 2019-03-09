@@ -2,7 +2,7 @@ import random
 
 def Text_input():
 	String=input("Enter the  Plain-text:")
-	String=String+'\n'+'\r'
+	String=String+'\r'+'\n'
 	return String
 
 def file_upload(filename):
@@ -11,16 +11,12 @@ def file_upload(filename):
 	for line in file:
 		for char in line:
 			string+=char
-	string=string+'\n'+'\r'
+	string=string+'\r'+'\n'
 	return string		
 
 def Text_ascii(String):
-	
-	Acii_Array=[]
 	convertText=''
-
 	for c in String:
-		print(c)
 		#print(c)
 		ascii_value= str(ord(c))
 		#print(ascii_value)
@@ -28,19 +24,15 @@ def Text_ascii(String):
 			pdded_Text='0'*(3-len(ascii_value))+ascii_value
 		else:
 			pdded_Text=ascii_value
-		#Acii_Array.append(pdded_Text)
 		convertText=convertText+' '+pdded_Text
-	print(convertText)
-		#Acii_Array.append()
-	#print(Acii_Array)
-	
-	return Acii_Array
+	#print(convertText)
+
+	return convertText.lstrip()
 def Ascii_binary(ascii_array):
 	bin_array=[]
 	for value in ascii_array:
-		for digit in value:
-			#print(bin(ord(digit))[2:].zfill(8))
-			bin_array.append(bin(ord(digit))[2:].zfill(8))
+		#print(bin(ord(digit))[2:].zfill(8))
+		bin_array.append(bin(ord(value))[2:].zfill(8))
 
 	return bin_array
 
@@ -60,7 +52,7 @@ def Ascii_binary_func(String):
 
 def String_Split(bin_array):
 	joined=''.join(bin_array)
-	print(joined,'Length',len(joined))
+	print joined,'Length',len(joined)
 
 	mid=len(joined)//2
 	#mid=len(bin_array)//2
@@ -81,8 +73,8 @@ def String_Split(bin_array):
 	String1=list(map(''.join, zip(*[iter(Str1)]*8)))
 	String2=list(map(''.join, zip(*[iter(Str2)]*8)))
 		
-	print('String1',String1)
-	print('String2',String2)
+	print'String1=',Str1
+	print'String2=',Str2
 
 	return String1,String2
 
@@ -120,7 +112,7 @@ string=file_upload("file.txt")
 ct=Text_ascii(string)
 print(ct)
 bin_array=Ascii_binary(ct)
-print(bin_array)
+#print(bin_array)
 #a,b=Ascii_binary_func(string)
 #print(a)
 #print(b)
