@@ -85,8 +85,8 @@ def String_Split(bin_array):
 	String1=split_chunks(Str1,8)
 	String2=split_chunks(Str2,8)
 
-	print 'String1=',String1
-	print 'String2=',String2
+	print('String1',String1)
+	print('String2',String2)
 
 	return String1,String2
 
@@ -94,18 +94,10 @@ def Crossover(String1,String2):
 	joined_String=''.join(String1)
 	joined_String2=''.join(String2)
 
-	'''if len(String1)== len(String2):
+	if len(String1)== len(String2):
 		for i in range(len(String1)//2+1):
 			j=i*2
 			String1[j],String2[j]=String2[j],String1[j]
-	return String1,String2'''
-	indpb = 0.5
-	size = min(len(String1), len(String2))
-	for i in xrange(size):
-		if random.random() < indpb:
-			#print random.random()
-			String1[i], String2[i] = String2[i], String1[i]
-
 	return String1,String2
 
 def mutation(String1,rate):
@@ -126,9 +118,9 @@ def combine(String1,String2):
 	return String1+String2
 
 
-#string=Text_input()
+string=Text_input()
 #string='This is the very important data'
-string=file_upload("file.txt")
+#string=file_upload("file.txt")
 ct=Text_ascii(string)
 print(ct)
 bin_array=Ascii_binary(ct)
@@ -137,11 +129,6 @@ print(bin_array)
 #print(a)
 #print(b)
 string1,string2=String_Split(bin_array)
-String1,String2=Crossover(string1,string2)
-print "String1=",String1
-print "String2=",String2
-
-
 '''
 print("String1")
 print(string1)

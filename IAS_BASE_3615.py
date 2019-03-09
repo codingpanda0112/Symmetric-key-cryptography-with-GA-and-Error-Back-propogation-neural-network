@@ -2,7 +2,7 @@ import random
 
 def Text_input():
 	String=input("Enter the  Plain-text:")
-	String=String+'\r'+'\n'
+	String=String+'\n'+'\r'
 	return String
 
 def file_upload(filename):
@@ -11,7 +11,7 @@ def file_upload(filename):
 	for line in file:
 		for char in line:
 			string+=char
-	string=string+'\r'+'\n'
+	string=string+'\n'+'\r'
 	return string		
 
 def Text_ascii(String):
@@ -20,6 +20,8 @@ def Text_ascii(String):
 	convertText=''
 
 	for c in String:
+		print(c)
+		#print(c)
 		ascii_value= str(ord(c))
 		#print(ascii_value)
 		if len(ascii_value)<3:
@@ -28,16 +30,17 @@ def Text_ascii(String):
 			pdded_Text=ascii_value
 		#Acii_Array.append(pdded_Text)
 		convertText=convertText+' '+pdded_Text
-
-	#print(convertText)
-
-	return convertText.lstrip()
+	print(convertText)
+		#Acii_Array.append()
+	#print(Acii_Array)
+	
+	return Acii_Array
 def Ascii_binary(ascii_array):
 	bin_array=[]
-	
-	for digit in ascii_array:
-		#print(bin(ord(digit))[2:].zfill(8))
-		bin_array.append(bin(ord(digit))[2:].zfill(8))
+	for value in ascii_array:
+		for digit in value:
+			#print(bin(ord(digit))[2:].zfill(8))
+			bin_array.append(bin(ord(digit))[2:].zfill(8))
 
 	return bin_array
 
@@ -54,14 +57,6 @@ def Ascii_binary_func(String):
 		bin_array.append(bin(ascii_array[i])[2:].zfill(8))
 		
 	return ascii_array,bin_array
-def split_chunks(array, chunksize,skip_tail=False):
-    formated_list = []
-    if chunksize <= len(array):
-        formated_list.extend([array[:chunksize]])
-        formated_list.extend(split_chunks(array[chunksize:], chunksize, skip_tail))
-    elif not skip_tail and array:
-        formated_list.extend([array])
-    return formated_list
 
 def String_Split(bin_array):
 	joined=''.join(bin_array)
@@ -82,11 +77,12 @@ def String_Split(bin_array):
 				
 	for j in range(mid,len(joined)):
 		Str2+=joined[j]
-	String1=split_chunks(Str1,8)
-	String2=split_chunks(Str2,8)
 
-	print 'String1=',String1
-	print 'String2=',String2
+	String1=list(map(''.join, zip(*[iter(Str1)]*8)))
+	String2=list(map(''.join, zip(*[iter(Str2)]*8)))
+		
+	print('String1',String1)
+	print('String2',String2)
 
 	return String1,String2
 
@@ -94,18 +90,10 @@ def Crossover(String1,String2):
 	joined_String=''.join(String1)
 	joined_String2=''.join(String2)
 
-	'''if len(String1)== len(String2):
+	if len(String1)== len(String2):
 		for i in range(len(String1)//2+1):
 			j=i*2
 			String1[j],String2[j]=String2[j],String1[j]
-	return String1,String2'''
-	indpb = 0.5
-	size = min(len(String1), len(String2))
-	for i in xrange(size):
-		if random.random() < indpb:
-			#print random.random()
-			String1[i], String2[i] = String2[i], String1[i]
-
 	return String1,String2
 
 def mutation(String1,rate):
@@ -137,11 +125,6 @@ print(bin_array)
 #print(a)
 #print(b)
 string1,string2=String_Split(bin_array)
-String1,String2=Crossover(string1,string2)
-print "String1=",String1
-print "String2=",String2
-
-
 '''
 print("String1")
 print(string1)
