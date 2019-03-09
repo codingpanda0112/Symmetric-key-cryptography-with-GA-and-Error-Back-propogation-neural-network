@@ -21,16 +21,13 @@ def Text_ascii(String):
 
 	for c in String:
 		ascii_value= str(ord(c))
-		#print(ascii_value)
+
 		if len(ascii_value)<3:
 			pdded_Text='0'*(3-len(ascii_value))+ascii_value
 		else:
 			pdded_Text=ascii_value
-		#Acii_Array.append(pdded_Text)
+		
 		convertText=convertText+' '+pdded_Text
-
-	#print(convertText)
-
 	return convertText.lstrip()
 def Ascii_binary(ascii_array):
 	bin_array=[]
@@ -47,9 +44,6 @@ def Ascii_binary_func(String):
 	bin_array=[]
 	print(String)
 	for  i in  range(len(String)):
-		#print(type(i),i)
-		#print(String[i],'ascii:',ord(String[i]))
-
 		ascii_array.append(ord(String[i]))
 		bin_array.append(bin(ascii_array[i])[2:].zfill(8))
 		
@@ -68,8 +62,6 @@ def String_Split(bin_array):
 	print(joined,'Length',len(joined))
 
 	mid=len(joined)//2
-	#mid=len(bin_array)//2
-	
 	Str1=""
 	Str2=""
 	String1=[]
@@ -85,27 +77,27 @@ def String_Split(bin_array):
 	String1=split_chunks(Str1,8)
 	String2=split_chunks(Str2,8)
 
-	print 'String1=',String1
-	print 'String2=',String2
+	print ('String1=',String1)
+	print ('String2=',String2)
 
 	return String1,String2
 
 def Crossover(String1,String2):
-	joined_String=''.join(String1)
-	joined_String2=''.join(String2)
-
-	'''if len(String1)== len(String2):
-		for i in range(len(String1)//2+1):
-			j=i*2
-			String1[j],String2[j]=String2[j],String1[j]
-	return String1,String2'''
+	
 	indpb = 0.5
+	temp = String1
 	size = min(len(String1), len(String2))
 	for i in xrange(size):
-		if random.random() < indpb:
-			#print random.random()
-			String1[i], String2[i] = String2[i], String1[i]
-
+		for j in range(len(String1[i])):
+			if random.random() < indpb:
+				#print random.random()
+				String1[i] = list(String1[i])
+				String2[i] = list(String2[i])
+				String1[i][j], String2[i][j] = String2[i][j], String1[i][j]
+				String1[i]=''.join(map(str, String1[i]))
+				String2[i]=''.join(map(str, String2[i]))
+				#String1[i]=String1[i].replace(String1[i][j],String2[i][j])
+				#String2[i]=String2[i].replace(String2[i][j],temp[i][j])
 	return String1,String2
 
 def mutation(String1,rate):
@@ -127,7 +119,6 @@ def combine(String1,String2):
 
 
 #string=Text_input()
-#string='This is the very important data'
 string=file_upload("file.txt")
 ct=Text_ascii(string)
 print(ct)
@@ -138,8 +129,10 @@ print(bin_array)
 #print(b)
 string1,string2=String_Split(bin_array)
 String1,String2=Crossover(string1,string2)
-print "String1=",String1
-print "String2=",String2
+print( "String1=",String1)
+print( "String2=",String2)
+combinedlist=combine(String1,String2)
+print("combined list=",combinedlist)
 
 
 '''
