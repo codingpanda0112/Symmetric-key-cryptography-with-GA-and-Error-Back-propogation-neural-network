@@ -1,0 +1,2 @@
+
+print(bin(ord('h')))
