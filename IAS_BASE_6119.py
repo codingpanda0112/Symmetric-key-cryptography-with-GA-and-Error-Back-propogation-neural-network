@@ -87,7 +87,7 @@ def Crossover(String1,String2):
 	indpb = 0.5
 	temp = String1
 	size = min(len(String1), len(String2))
-	for i in range(size):
+	for i in xrange(size):
 		for j in range(len(String1[i])):
 			if random.random() < indpb:
 				#print random.random()
@@ -96,50 +96,26 @@ def Crossover(String1,String2):
 				String1[i][j], String2[i][j] = String2[i][j], String1[i][j]
 				String1[i]=''.join(map(str, String1[i]))
 				String2[i]=''.join(map(str, String2[i]))
-				
+				#String1[i]=String1[i].replace(String1[i][j],String2[i][j])
+				#String2[i]=String2[i].replace(String2[i][j],temp[i][j])
 	return String1,String2
 
 def mutation(String1,rate):
 	number=rate*len(string1)*8
 	count=0
-	#print('length of string',len(String1))
 	while(count<number):
-<<<<<<< HEAD
-		j=random.randrange(0,len(String1))
-		k=random.randrange(0,8)
+		j=random.random(0,len(String1))
+		k=random.random(0,8)
 		if(String1[j][k]==1):
 			String1[j][k]=0
 		elif (String1[j][k]==0):
 			String1[j][k]=1
-=======
-		#print(count)
-		j=random.randrange(0,len(String1))
-		#print(j)
-		k=random.randrange(0,8)
-		#print(k)
-		#print('String before mutation=',String1[j])
-		if(String1[j][k]=='1'):
-			String1[j] = list(String1[j])
-			String1[j][k] = 0
-			String1[j]=''.join(map(str, String1[j]))
-			#print('String after mutation =',String1[j])
-		elif (String1[j][k]=='0'):
-			String1[j] = list(String1[j])
-			String1[j][k] = 1
-			String1[j]=''.join(map(str, String1[j]))
-			#print('String after mutation =',String1[j])
->>>>>>> 0ac9b0c6324bd5720a2ec608a1dee7dfe7d2d657
 		count+=1
 
 	return String1
 
 def combine(String1,String2):
-	str1=''.join(String1)
-	str2=''.join(String2)
-	Str=str1+str2
-	combinedlist=split_chunks(Str,8)
-
-	return  combinedlist
+	return String1+String2
 
 
 #string=Text_input()
@@ -157,11 +133,6 @@ print( "String1=",String1)
 print( "String2=",String2)
 combinedlist=combine(String1,String2)
 print("combined list=",combinedlist)
-string=mutation(combinedlist,30)
-
-mutated_string= mutation(combinedlist,0.20)
-print("mutated string")
-print(mutated_string)
 
 
 '''

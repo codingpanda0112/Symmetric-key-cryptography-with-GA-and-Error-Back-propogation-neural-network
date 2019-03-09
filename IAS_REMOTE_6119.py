@@ -104,14 +104,6 @@ def mutation(String1,rate):
 	count=0
 	#print('length of string',len(String1))
 	while(count<number):
-<<<<<<< HEAD
-		j=random.randrange(0,len(String1))
-		k=random.randrange(0,8)
-		if(String1[j][k]==1):
-			String1[j][k]=0
-		elif (String1[j][k]==0):
-			String1[j][k]=1
-=======
 		#print(count)
 		j=random.randrange(0,len(String1))
 		#print(j)
@@ -128,7 +120,6 @@ def mutation(String1,rate):
 			String1[j][k] = 1
 			String1[j]=''.join(map(str, String1[j]))
 			#print('String after mutation =',String1[j])
->>>>>>> 0ac9b0c6324bd5720a2ec608a1dee7dfe7d2d657
 		count+=1
 
 	return String1
@@ -157,7 +148,6 @@ print( "String1=",String1)
 print( "String2=",String2)
 combinedlist=combine(String1,String2)
 print("combined list=",combinedlist)
-string=mutation(combinedlist,30)
 
 mutated_string= mutation(combinedlist,0.20)
 print("mutated string")
