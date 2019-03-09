@@ -85,19 +85,23 @@ def String_Split(bin_array):
 	String1=split_chunks(Str1,8)
 	String2=split_chunks(Str2,8)
 
-	print('String1',String1)
-	print('String2',String2)
+	#print('String1',String1)
+	#print('String2',String2)
 
 	return String1,String2
 
 def Crossover(String1,String2):
-	joined_String=''.join(String1)
+	joined_String1=''.join(String1)
 	joined_String2=''.join(String2)
 
-	if len(String1)== len(String2):
-		for i in range(len(String1)//2+1):
+	if len(joined_String1)== len(joined_String2):
+		for i in range(len(String1)//2):
 			j=i*2
-			String1[j],String2[j]=String2[j],String1[j]
+			temp=joined_String1[j]
+			joined_String1[j]=joined_String2[j]
+			joined_String2[j]=temp
+	String1=split_chunks(joined_String1,8)
+	String2=split_chunks(joined_String2,8)
 	return String1,String2
 
 def mutation(String1,rate):
@@ -125,11 +129,8 @@ ct=Text_ascii(string)
 print(ct)
 bin_array=Ascii_binary(ct)
 print(bin_array)
-#a,b=Ascii_binary_func(string)
-#print(a)
-#print(b)
 string1,string2=String_Split(bin_array)
-'''
+
 print("String1")
 print(string1)
 print("String2")
@@ -141,7 +142,7 @@ print("String1")
 print(String1)
 print("String2")
 print(String2)
-print("combined list")
+'''print("combined list")
 combinedlist=combine(String1,String2)
 print(combinedlist)
 string=mutation(combinedlist,30)'''
