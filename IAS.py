@@ -5,12 +5,13 @@ def Text_input():
 	String=String+'\n'+'\r'
 	return String
 
-def file_upload(filname):
+def file_upload(filename):
 	string=''
-	file = open('filename', "r")
+	file = open(filename, "r")
 	for line in file:
 		for char in line:
 			string+=char
+	string=string+'\n'+'\r'
 	return string		
 
 def Text_ascii(String):
@@ -115,7 +116,7 @@ def combine(String1,String2):
 
 #string=Text_input()
 #string='This is the very important data'
-#string=file_upload(sampletext.txt)
+string=file_upload("file.txt")
 ct=Text_ascii(string)
 print(ct)
 bin_array=Ascii_binary(ct)
