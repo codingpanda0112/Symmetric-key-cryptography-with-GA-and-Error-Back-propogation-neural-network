@@ -2,7 +2,7 @@ import random
 
 def Text_input():
 	String=input("Enter the  Plain-text:")
-	String=String+'\n'+'\r'
+	String=String+'\r'+'\n'
 	return String
 
 def file_upload(filename):
@@ -11,7 +11,7 @@ def file_upload(filename):
 	for line in file:
 		for char in line:
 			string+=char
-	string=string+'\n'+'\r'
+	string=string+'\r'+'\n'
 	return string		
 
 def Text_ascii(String):
@@ -20,8 +20,6 @@ def Text_ascii(String):
 	convertText=''
 
 	for c in String:
-		print(c)
-		#print(c)
 		ascii_value= str(ord(c))
 		#print(ascii_value)
 		if len(ascii_value)<3:
@@ -30,17 +28,16 @@ def Text_ascii(String):
 			pdded_Text=ascii_value
 		#Acii_Array.append(pdded_Text)
 		convertText=convertText+' '+pdded_Text
-	print(convertText)
-		#Acii_Array.append()
-	#print(Acii_Array)
-	
-	return Acii_Array
+
+	#print(convertText)
+
+	return convertText.lstrip()
 def Ascii_binary(ascii_array):
 	bin_array=[]
-	for value in ascii_array:
-		for digit in value:
-			#print(bin(ord(digit))[2:].zfill(8))
-			bin_array.append(bin(ord(digit))[2:].zfill(8))
+	
+	for digit in ascii_array:
+		#print(bin(ord(digit))[2:].zfill(8))
+		bin_array.append(bin(ord(digit))[2:].zfill(8))
 
 	return bin_array
 
@@ -57,6 +54,14 @@ def Ascii_binary_func(String):
 		bin_array.append(bin(ascii_array[i])[2:].zfill(8))
 		
 	return ascii_array,bin_array
+def split_chunks(array, chunksize,skip_tail=False):
+    formated_list = []
+    if chunksize <= len(array):
+        formated_list.extend([array[:chunksize]])
+        formated_list.extend(split_chunks(array[chunksize:], chunksize, skip_tail))
+    elif not skip_tail and array:
+        formated_list.extend([array])
+    return formated_list
 
 def String_Split(bin_array):
 	joined=''.join(bin_array)
@@ -77,10 +82,9 @@ def String_Split(bin_array):
 				
 	for j in range(mid,len(joined)):
 		Str2+=joined[j]
+	String1=split_chunks(Str1,8)
+	String2=split_chunks(Str2,8)
 
-	String1=list(map(''.join, zip(*[iter(Str1)]*8)))
-	String2=list(map(''.join, zip(*[iter(Str2)]*8)))
-		
 	print('String1',String1)
 	print('String2',String2)
 
@@ -114,9 +118,9 @@ def combine(String1,String2):
 	return String1+String2
 
 
-#string=Text_input()
+string=Text_input()
 #string='This is the very important data'
-string=file_upload("file.txt")
+#string=file_upload("file.txt")
 ct=Text_ascii(string)
 print(ct)
 bin_array=Ascii_binary(ct)
