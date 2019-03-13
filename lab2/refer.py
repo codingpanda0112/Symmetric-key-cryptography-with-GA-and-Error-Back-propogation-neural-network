@@ -75,19 +75,13 @@ def train_network(network, train, l_rate, n_epoch, n_outputs):
 		for row in train:
 			outputs = forward_propagate(network, row)
 			expected = [0 for i in range(n_outputs)]
-			expected[row[-1]] = 1
-			sum_error += sum([(expected[i]-outputs[i])**2 for i in range(len(expected))])
-			backward_propagate_error(network, expected)
-			update_weights(network, row, l_rate)
+			print("-------"+row[-1])
+			#expected[row[-1]] = 1
+			#sum_error += sum([(expected[i]-outputs[i])**2 for i in range(len(expected))])
+			#backward_propagate_error(network, expected)
+			#update_weights(network, row, l_rate)
 		print('>epoch=%d, lrate=%.3f, error=%.3f' % (epoch, l_rate, sum_error))
  
-# Make a prediction with a network
-def predict(network, row):
-	outputs = forward_propagate(network, row)
-	print outputs
-	return outputs.index(max(outputs))
-
-
 # Test training backprop algorithm
 seed(1)
 dataset = [[2.7810836,2.550537003,0],
@@ -106,7 +100,3 @@ network = initialize_network(n_inputs, 2, n_outputs)
 train_network(network, dataset, 0.5, 20, n_outputs)
 for layer in network:
 	print(layer)
-
-for row in dataset:
-	prediction = predict(network, row)
-	print('Expected=%d, Got=%d' % (row[-1], prediction))
