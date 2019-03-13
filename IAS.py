@@ -100,7 +100,7 @@ def Crossover(String1,String2):
 	return String1,String2
 
 def mutation(String1,rate):
-	number=rate*len(string1)*8
+	number=rate*len(String1)*8
 	count=0
 	#print('length of string',len(String1))
 	while(count<number):
@@ -132,42 +132,50 @@ def combine(String1,String2):
 
 	return  combinedlist
 
+def Encryption(string):
+	#convert String to Ascii value
+	print("+++++++++++++++++++++++++++++++++++++++++++++++++++++++ Ascii array ++++++++++++++++++++++++++++++++++++++++++++++++++++++++")
+	ascii_string=Text_ascii(string)
+	print(ascii_string)
+	#conver Ascii to binary
+	print("+++++++++++++++++++++++++++++++++++++++++++++++++++++++ binary array ++++++++++++++++++++++++++++++++++++++++++++++++++++++++")
+	bin_array=Ascii_binary(ascii_string)
+	print(bin_array)
+	#Split the binary Array into two	
+	print("+++++++++++++++++++++++++++++++++++++++++++++++++++++++ split String ++++++++++++++++++++++++++++++++++++++++++++++++++++++++")
+	string1,string2=String_Split(bin_array)
+	print("STRING 1:")
+	print(string1)
+	print('')
+	print("STRING 2:")
+	print(string2)
+	#Crossover the String and return
+	print("+++++++++++++++++++++++++++++++++++++++++++++++++++++++ crossover ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++")
+	String1,String2=Crossover(string1,string2)
+	combinedlist=combine(String1,String2)
+	print(combinedlist)
 
-#string=Text_input()
-string=file_upload("file.txt")
-ct=Text_ascii(string)
-print(ct)
-bin_array=Ascii_binary(ct)
-print(bin_array)
-#a,b=Ascii_binary_func(string)
-#print(a)
-#print(b)
-string1,string2=String_Split(bin_array)
-String1,String2=Crossover(string1,string2)
-print( "String1=",String1)
-print( "String2=",String2)
-combinedlist=combine(String1,String2)
-print("combined list=",combinedlist)
+	print("+++++++++++++++++++++++++++++++++++++++++++++++++++++++ mutated data ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++")
+	mutated_string= mutation(combinedlist,0.20)
+	print(mutated_string)
 
-mutated_string= mutation(combinedlist,0.20)
-print("mutated string")
-print(mutated_string)
+	return bin_array,mutated_string
 
 
-'''
-print("String1")
-print(string1)
-print("String2")
-print(string2)
-print("=======================")
-print("After Crossover")
-String1,String2=Crossover(string1,string2)
-print("String1")
-print(String1)
-print("String2")
-print(String2)
-print("combined list")
-combinedlist=combine(String1,String2)
-print(combinedlist)
-string=mutation(combinedlist,30)'''
 
+def main():
+	print("Select the option to give input:")
+	print("1.command line input")
+	print("2.File upload")
+
+	option=int(input("Enter your option:"))
+
+	if option==1:
+		string=Text_input()
+		binArray,cipher=Encryption(string)
+	if option==2:
+		filename=input("Enter the filename with extension:")
+		string=file_upload(filename)
+		binArray,cipher=Encryption(string)
+if __name__ == '__main__':
+	main()
