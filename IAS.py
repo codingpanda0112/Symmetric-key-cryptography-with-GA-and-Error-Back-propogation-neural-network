@@ -1,4 +1,5 @@
 import random
+import csv
 
 def Text_input():
 	String=input("Enter the  Plain-text:")
@@ -59,14 +60,14 @@ def split_chunks(array, chunksize,skip_tail=False):
 
 def String_Split(bin_array):
 	joined=''.join(bin_array)
-	print(joined,'Length',len(joined))
+	#print(joined,'Length',len(joined))
 
 	mid=len(joined)//2
 	Str1=""
 	Str2=""
 	String1=[]
 	String2=[]
-	print(mid)
+	#print(mid)
 
 	for i in range(0,mid):
 		#print(bin_array[i])
@@ -135,14 +136,17 @@ def combine(String1,String2):
 def Encryption(string):
 	#convert String to Ascii value
 	print("+++++++++++++++++++++++++++++++++++++++++++++++++++++++ Ascii array ++++++++++++++++++++++++++++++++++++++++++++++++++++++++")
+	print('')
 	ascii_string=Text_ascii(string)
 	print(ascii_string)
 	#conver Ascii to binary
 	print("+++++++++++++++++++++++++++++++++++++++++++++++++++++++ binary array ++++++++++++++++++++++++++++++++++++++++++++++++++++++++")
+	print('')
 	bin_array=Ascii_binary(ascii_string)
 	print(bin_array)
 	#Split the binary Array into two	
 	print("+++++++++++++++++++++++++++++++++++++++++++++++++++++++ split String ++++++++++++++++++++++++++++++++++++++++++++++++++++++++")
+	print('')
 	string1,string2=String_Split(bin_array)
 	print("STRING 1:")
 	print(string1)
@@ -151,11 +155,13 @@ def Encryption(string):
 	print(string2)
 	#Crossover the String and return
 	print("+++++++++++++++++++++++++++++++++++++++++++++++++++++++ crossover ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++")
+	print('')
 	String1,String2=Crossover(string1,string2)
 	combinedlist=combine(String1,String2)
 	print(combinedlist)
 
 	print("+++++++++++++++++++++++++++++++++++++++++++++++++++++++ mutated data ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++")
+	print('')
 	mutated_string= mutation(combinedlist,0.20)
 	print(mutated_string)
 
@@ -170,6 +176,7 @@ def main():
 
 	option=int(input("Enter your option:"))
 
+
 	if option==1:
 		string=Text_input()
 		binArray,cipher=Encryption(string)
@@ -177,5 +184,27 @@ def main():
 		filename=input("Enter the filename with extension:")
 		string=file_upload(filename)
 		binArray,cipher=Encryption(string)
+	final_array=[]
+	Y=[]
+	for item in binArray:
+		subset=[]
+		Y.append(int(item,2))
+		for elements in item:
+			subset.append(elements)
+		final_array.append(subset)
+	print(final_array)
+	print(Y)
+
+	with open('data.csv', mode='w') as employee_file:
+		employee_writer = csv.writer(employee_file, delimiter=',', quotechar='"', quoting=csv.QUOTE_MINIMAL)
+		for item in final_array:
+			employee_writer.writerow(item)
+	
+
+	with open('output.csv', 'w', newline='') as out:
+		spamwriter = csv.writer(out, delimiter=',');
+		for item in Y:
+			spamwriter.writerow(item);
+
 if __name__ == '__main__':
 	main()
