@@ -185,15 +185,23 @@ def main():
 		string=file_upload(filename)
 		binArray,cipher=Encryption(string)
 	final_array=[]
+
 	Y=[]
+	for i in range(len(cipher)):
+		subset=[]
+		#Y.append(int(item,2))
+		for elements in cipher[i]:
+			subset.append(elements)
+		#subset.append(int(binArray[i],2))
+		subset.append(binArray[i])
+
+		final_array.append(subset)
+
 	for item in binArray:
 		subset=[]
-		Y.append(int(item,2))
-		for elements in item:
-			subset.append(elements)
-		final_array.append(subset)
+
 	print(final_array)
-	print(Y)
+	#print(Y)
 
 	with open('data.csv', mode='w') as employee_file:
 		employee_writer = csv.writer(employee_file, delimiter=',', quotechar='"', quoting=csv.QUOTE_MINIMAL)
@@ -201,10 +209,6 @@ def main():
 			employee_writer.writerow(item)
 	
 
-	with open('output.csv', 'w', newline='') as out:
-		spamwriter = csv.writer(out, delimiter=',');
-		for item in Y:
-			spamwriter.writerow(item);
-
+	
 if __name__ == '__main__':
 	main()
