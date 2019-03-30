@@ -116,7 +116,7 @@ def join_bit(Matrix):
             pixel = ''
             for slices in range(no_of_slices):
                 pixel+=Matrix[slices,i][j]
-            bit_array.append(pixel)
+            bit_array.append(int(pixel,2))
         joined_bits.append(bit_array)
     print(joined_bits)
     return joined_bits
