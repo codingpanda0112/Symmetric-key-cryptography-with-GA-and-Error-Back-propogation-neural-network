@@ -186,24 +186,32 @@ def main():
 		binArray,cipher=Encryption(string)
 	final_array=[]
 
-	Y=[]
+	dataString=""
+
 	for i in range(len(cipher)):
 		subset=[]
 		#Y.append(int(item,2))
 		for elements in cipher[i]:
 			subset.append(elements)
-		#subset.append(int(binArray[i],2))
-		subset.append(binArray[i])
+			dataString=dataString+''.join(elements)
+		#subset.ap+pend(int(binArray[i],2))
+		strng='00'+binArray[i]
+		subset.append(strng)
+		dataString=dataString+binArray[i]
 
 		final_array.append(subset)
 
-	for item in binArray:
-		subset=[]
+	#print(dataString)
+	file1 = open("myfile.txt","w")#write mode 
+	file1.write(dataString) 
+	file1.close() 
+	print("Data send to myfile.txt")
 
-	print(final_array)
+
+	#print(final_array)
 	#print(Y)
 
-	with open('data.csv', mode='w') as employee_file:
+	with open('data1.csv', mode='w') as employee_file:
 		employee_writer = csv.writer(employee_file, delimiter=',', quotechar='"', quoting=csv.QUOTE_MINIMAL)
 		for item in final_array:
 			employee_writer.writerow(item)
